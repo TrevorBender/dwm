@@ -230,6 +230,7 @@ static int textnw(const char *text, unsigned int len);
 static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglepassthrough(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, Bool setfocus);
@@ -283,6 +284,7 @@ static Display *dpy;
 static DC dc;
 static Monitor *mons = NULL, *selmon = NULL;
 static Window root;
+static Bool passthroughmode = False;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1083,13 +1085,24 @@ keypress(XEvent *e) {
 	KeySym keysym;
 	XKeyEvent *ev;
 
-	ev = &e->xkey;
-	keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
-	for(i = 0; i < LENGTH(keys); i++)
-		if(keysym == keys[i].keysym
-		&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
-		&& keys[i].func)
-			keys[i].func(&(keys[i].arg));
+	if (passthroughmode) {
+		ev = &e->xkey;
+		keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+		for(i = 0; i < LENGTH(keys); i++)
+			if(keysym == keys[i].keysym
+					&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
+					&& keys[i].func)
+				if (keys[i].func == togglepassthrough)
+					keys[i].func(&(keys[i].arg));
+	} else {
+		ev = &e->xkey;
+		keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+		for(i = 0; i < LENGTH(keys); i++)
+			if(keysym == keys[i].keysym
+					&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
+					&& keys[i].func)
+				keys[i].func(&(keys[i].arg));
+	}
 }
 
 void
@@ -1759,6 +1772,27 @@ toggletag(const Arg *arg) {
 		arrange(selmon);
 	}
 }
+
+void
+togglepassthrough(const Arg *ignored) {
+	passthroughmode = !passthroughmode;
+	if (passthroughmode) {
+		unsigned int i, j;
+		unsigned int modifiers[] = { 0, LockMask, numlockmask, numlockmask|LockMask };
+		KeyCode code;
+
+		XUngrabKey(dpy, AnyKey, AnyModifier, root);
+		for(i = 0; i < LENGTH(keys); i++)
+			if((code = XKeysymToKeycode(dpy, keys[i].keysym)))
+				if (keys[i].func == togglepassthrough)
+					for(j = 0; j < LENGTH(modifiers); j++)
+						XGrabKey(dpy, code, keys[i].mod | modifiers[j], root,
+								True, GrabModeAsync, GrabModeAsync);
+	} else {
+		grabkeys ();
+	}
+}
+
 
 void
 toggleview(const Arg *arg) {
