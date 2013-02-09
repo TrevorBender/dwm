@@ -50,6 +50,7 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 
 #include "bstack.c"
 #include "bstackhoriz.c"
+#include "gaplessgrid.c"
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[]=",      tile },    /* first entry is default */
@@ -57,6 +58,7 @@ static const Layout layouts[] = {
     { "[M]",      monocle },
     { "TTT",      bstack  },
     { "===",      bstackhoriz },
+    { "+++",      gaplessgrid },
 };
 
 /* key definitions */
@@ -127,11 +129,12 @@ static Key keys[] = {
     { MODKEY,                       XK_Tab,    view,           {0} },
     { MODKEY,                       XK_c,      spawn,          {.v = clear_notification } },
     { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-    { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                       XK_b,      setlayout,      {.v = &layouts[3]} },
-    { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} },
+    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
+    { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
+    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monacle
+    { MODKEY,                       XK_b,      setlayout,      {.v = &layouts[3]} }, // bstack
+    { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} }, // bstackhoriz
+    { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, // gaplessgrid
     { MODKEY,                       XK_s,      spawn,          {.v = SLEEP } },
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = slock_and_sleep } },
     { MODKEY|ShiftMask,             XK_m,      warpmouse,      {.v = mouse_coords } },
