@@ -323,6 +323,7 @@ static DC dc;
 static Monitor *mons = NULL, *selmon = NULL;
 static Window root;
 static Bool passthroughmode = False;
+static int exitcode = 0;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1509,6 +1510,7 @@ propertynotify(XEvent *e) {
 
 void
 quit(const Arg *arg) {
+	exitcode = arg->i;
 	running = False;
 }
 
@@ -2565,5 +2567,5 @@ main(int argc, char *argv[]) {
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
-	return EXIT_SUCCESS;
+	return exitcode;
 }
