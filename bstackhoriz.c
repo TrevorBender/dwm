@@ -17,6 +17,18 @@ bstackhoriz(Monitor *m) {
 		ty = m->wy;
 	}
 	for(i = mx = 0, tx = m->wx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++) {
+		if(n == 1) {
+			if (c->bw) {
+				/* remove border when only one window is on the current tag */
+				c->oldbw = c->bw;
+				c->bw = 0;
+			}
+		}
+		else if(!c->bw && c->oldbw) {
+			/* restore border when more than one window is displayed */
+			c->bw = c->oldbw;
+			c->oldbw = 0;
+		}
 		if(i < m->nmaster) {
 			w = (m->ww - mx) / (MIN(n, m->nmaster) - i);
 			resize(c, m->wx + mx, m->wy, w - (2 * c->bw), mh - (2 * c->bw), False);
