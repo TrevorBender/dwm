@@ -74,7 +74,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-static const char *termcmd[]  = { "xfce4-terminal", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *clear_notification[] = { "cln", NULL };
 
 static const int mouse_coords[] = { (1920/2), 0 }; // middle, top of screen
