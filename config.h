@@ -2,7 +2,7 @@
 
 /* appearance */
 static const char font[] = 
-"-*-terminus-medium-r-*-*-12-*-*-*-*-*-*-*"
+"-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"
 //","
 //"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*" 
 ;
@@ -12,7 +12,8 @@ static const char font[] =
 static const char colors[NUMCOLORS][ColLast][8] = {
     // border    foreground background
     { "#fdf6e3", "#657b83", "#fdf6e3" }, // 1 = normal
-    { "#6c71c4", "#fdf6e3", "#657b83" }, // 2 = selected
+    //{ "#6c71c4", "#fdf6e3", "#657b83" }, // 2 = selected
+    { "#00ff00", "#fdf6e3", "#657b83" }, // 2 = selected
 };
 
 //static const char normbordercolor[] = "#fdf6e3";
@@ -31,7 +32,7 @@ static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
 //static const char *tags[] = { "☕", "☯", "☮", "✇", "☊"};
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "Â", "À", "3", "4", "5", "6", "7", "8", "9" };
 //static const char *tags[] = { "\uE16A", "\uE16B", "\uE16C", "\uE16D", "\uE16E", "\uE16F", "\uE170", "\uE171", "\uE172" };
 
 static const Rule rules[] = {
@@ -53,12 +54,12 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 #include "gaplessgrid.c"
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[]=",      tile },    /* first entry is default */
-    { "><>",      NULL },    /* no layout function means floating behavior */
+    { "É",      tile },    /* first entry is default */
+    { "Ê",      NULL },    /* no layout function means floating behavior */
     { "[M]",      monocle },
-    { "TTT",      bstack  },
-    { "===",      bstackhoriz },
-    { "+++",      gaplessgrid },
+    { "Ì",      bstack  },
+    { "Ë",      bstackhoriz },
+    { "Í",      gaplessgrid },
 };
 
 /* key definitions */
@@ -74,6 +75,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
+//static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *clear_notification[] = { "cln", NULL };
 
@@ -97,7 +99,7 @@ static const char * lxrandr[] = { "lxrandr", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
-    { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { MODKEY|ShiftMask,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     //{ MODKEY,                       XK_i,      spawn,          {.v = mpc_toggle } },
     //{ MODKEY,                       XK_o,      spawn,          {.v = mpc_next } },
@@ -148,16 +150,16 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { MODKEY|ShiftMask|ControlMask, XK_p,      togglepassthrough, {0} },
     TAGKEYS(                        XK_1,                      0)
-        TAGKEYS(                        XK_2,                      1)
-        TAGKEYS(                        XK_3,                      2)
-        TAGKEYS(                        XK_4,                      3)
-        TAGKEYS(                        XK_5,                      4)
-        TAGKEYS(                        XK_6,                      5)
-        TAGKEYS(                        XK_7,                      6)
-        TAGKEYS(                        XK_8,                      7)
-        TAGKEYS(                        XK_9,                      8)
-        { MODKEY|ShiftMask,             XK_r,      quit,           {.i = 0} },
-        { MODKEY|ShiftMask,             XK_q,      quit,           {.i = 1} },
+    TAGKEYS(                        XK_2,                      1)
+    TAGKEYS(                        XK_3,                      2)
+    TAGKEYS(                        XK_4,                      3)
+    TAGKEYS(                        XK_5,                      4)
+    TAGKEYS(                        XK_6,                      5)
+    TAGKEYS(                        XK_7,                      6)
+    TAGKEYS(                        XK_8,                      7)
+    TAGKEYS(                        XK_9,                      8)
+    { MODKEY|ShiftMask,             XK_r,      quit,           {.i = 0} },
+    { MODKEY|ShiftMask,             XK_q,      quit,           {.i = 1} },
 };
 
 /* button definitions */
