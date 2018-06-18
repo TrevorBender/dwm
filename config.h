@@ -1,12 +1,16 @@
+#include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[] = 
-"-*-terminus2-medium-r-*-*-12-*-*-*-*-*-*-*"
+static const char font[] =
+//"-*-fixed-*-r-*-*-20-140-*-*-*-*-*-*"
+//"-*-terminal-bold-r-*-*-18-140-*-*-*-*-*-*"
+//"-*-inconsolata-medium-r-*-*-22-*-*-*-*-*-*-*"
+"Inconsolata:pixelsize=12:antialias=true;hinting=true"
+//"-*-droid sans mono-medium-r-normal-*-22-*-*-*-*-*-*-*";
 //","
-//"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*" 
+//"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*"
 ;
-//static const char font[] = "-*-droid sans mono-medium-r-normal-*-*-*-*-*-*-*-*-*";
 
 #define NUMCOLORS 2
 static const char colors[NUMCOLORS][ColLast][8] = {
@@ -32,7 +36,8 @@ static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
 //static const char *tags[] = { "☕", "☯", "☮", "✇", "☊"};
-static const char *tags[] = { "Â", "À", "3", "4", "5", "6", "7", "8", "9" };
+//static const char *tags[] = { "Â", "À", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 //static const char *tags[] = { "\uE16A", "\uE16B", "\uE16C", "\uE16D", "\uE16E", "\uE16F", "\uE170", "\uE171", "\uE172" };
 
 static const Rule rules[] = {
@@ -52,14 +57,23 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 #include "bstack.c"
 #include "bstackhoriz.c"
 #include "gaplessgrid.c"
+//static const Layout layouts[] = {
+    //[> symbol     arrange function <]
+    //{ "É",      tile },    [> first entry is default <]
+    //{ "Ê",      NULL },    [> no layout function means floating behavior <]
+    //{ "[M]",      monocle },
+    //{ "Ì",      bstack  },
+    //{ "Ë",      bstackhoriz },
+    //{ "Í",      gaplessgrid },
+//};
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "É",      tile },    /* first entry is default */
-    { "Ê",      NULL },    /* no layout function means floating behavior */
+    { "||=",      tile },    /* first entry is default */
+    { "F ",      NULL },    /* no layout function means floating behavior */
     { "[M]",      monocle },
-    { "Ì",      bstack  },
-    { "Ë",      bstackhoriz },
-    { "Í",      gaplessgrid },
+    { "T  ",      bstack  },
+    { "=  ",      bstackhoriz },
+    { "||=",      gaplessgrid },
 };
 
 /* key definitions */
@@ -77,7 +91,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 //static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *clear_notification[] = { "cln", NULL };
+//static const char *clear_notification[] = { "cln", NULL };
 
 static const int mouse_coords[] = { (1920/2), 0 }; // middle, top of screen
 
@@ -87,11 +101,16 @@ static const char * backlight_down[] = { "backlight", "down", NULL };
 static const char * backlight_up[] = { "backlight", "up", NULL };
 static const char * slock[] = { "slock", NULL };
 static const char * slock_and_sleep[] = { "slocksleep", NULL };
-static const char * SLEEP[] = { "SLEEP", NULL };
+static const char * SLEEP[] = { "sudo", "pm-suspend", NULL };
 static const char * sound_toggle[] = { "amixer", "set", "Master", "toggle", NULL };
 static const char * sound_up[] = { "amixer", "set", "Master", "5%+", NULL };
 static const char * sound_down[] = { "amixer", "set", "Master", "5%-", NULL };
 static const char * lxrandr[] = { "lxrandr", NULL };
+static const char * browser[] = { "browser", NULL };
+static const char * cef_browser[] = { "cef", NULL };
+static const char * touchpad_toggle[] = { "touchpad_toggle", NULL };
+static const char * xmodmap[] = { "xmodmap", "/home/trevor/.Xmodmap", NULL };
+static const char * vim_anywhere[] = { "/home/trevor/.vim-anywhere/bin/run", NULL };
 
 #include "mousewarp.c"
 #include "movestack.c"
@@ -99,19 +118,20 @@ static const char * lxrandr[] = { "lxrandr", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
-    { MODKEY|ShiftMask,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     //{ MODKEY,                       XK_i,      spawn,          {.v = mpc_toggle } },
     //{ MODKEY,                       XK_o,      spawn,          {.v = mpc_next } },
     //{ MODKEY,                       XK_u,      spawn,          {.v = mpc_prev } },
     //{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = mpc_seekf } },
     //{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = mpc_seekr } },
-    { MODKEY,                       XK_F1,     spawn,          {.v = slock_and_sleep } },
-    { MODKEY,                       XK_F3,     spawn,          {.v = kbd_backlight_down } },
-    { MODKEY,                       XK_F4,     spawn,          {.v = kbd_backlight_up } },
+    { MODKEY,                       XK_F1,     spawn,          {.v = SLEEP } },
+    { 0,                       XF86XK_KbdBrightnessDown,     spawn,          {.v = kbd_backlight_down } },
+    { 0,                       XF86XK_KbdBrightnessUp,     spawn,          {.v = kbd_backlight_up } },
     { MODKEY,                       XK_F5,     spawn,          {.v = backlight_down } },
     { MODKEY,                       XK_F6,     spawn,          {.v = backlight_up } },
     { MODKEY,                       XK_F8,     spawn,          {.v = lxrandr } },
+    { MODKEY,                       XK_F9,     spawn,          {.v = touchpad_toggle } },
     { MODKEY,                       XK_F10,    spawn,          {.v = sound_toggle } },
     { MODKEY,                       XK_F11,    spawn,          {.v = sound_down } },
     { MODKEY,                       XK_F12,    spawn,          {.v = sound_up } },
@@ -129,17 +149,20 @@ static Key keys[] = {
     { MODKEY,                       XK_equal,  setmfact,       {.f = 1.5} },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
-    { MODKEY,                       XK_c,      spawn,          {.v = clear_notification } },
+    //{ MODKEY,                       XK_c,      spawn,          {.v = clear_notification } },
     { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
     { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
     { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
     { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monacle
-    { MODKEY,                       XK_b,      setlayout,      {.v = &layouts[3]} }, // bstack
+    //{ MODKEY|ShiftMask,             XK_b,      setlayout,      {.v = &layouts[3]} }, // bstack
     { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} }, // bstackhoriz
     { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, // gaplessgrid
+    { MODKEY,                       XK_b,      spawn,          {.v = browser } },
+    { MODKEY,                       XK_c,      spawn,          {.v = cef_browser } },
     { MODKEY,                       XK_s,      spawn,          {.v = SLEEP } },
     { MODKEY|ShiftMask,             XK_s,      spawn,          {.v = slock_and_sleep } },
     { MODKEY|ShiftMask,             XK_m,      warpmouse,      {.v = mouse_coords } },
+    { MODKEY,                       XK_x,      spawn,          { .v = xmodmap } },
     { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -149,6 +172,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
     { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { MODKEY|ShiftMask|ControlMask, XK_p,      togglepassthrough, {0} },
+    { MODKEY,                       XK_v,      spawn,          { .v = vim_anywhere } },
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)

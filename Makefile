@@ -8,6 +8,9 @@ OBJ = ${SRC:.c=.o}
 
 all: options dwm
 
+tags: ${SRC}
+	@ctags *.c config.h
+
 options:
 	@echo dwm build options:
 	@echo "CFLAGS   = ${CFLAGS}"
