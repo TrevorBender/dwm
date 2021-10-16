@@ -5,6 +5,7 @@ include config.mk
 
 SRC = dwm.c
 OBJ = ${SRC:.c=.o}
+CFLAGS += -DGRUVBOX
 
 all: options dwm
 

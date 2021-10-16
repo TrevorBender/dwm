@@ -12,6 +12,7 @@ static const char font[] =
 //"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*"
 ;
 
+#ifdef SOLARIZED
 #define NUMCOLORS 2
 static const char colors[NUMCOLORS][ColLast][8] = {
     // border    foreground background
@@ -19,6 +20,31 @@ static const char colors[NUMCOLORS][ColLast][8] = {
     //{ "#6c71c4", "#fdf6e3", "#657b83" }, // 2 = selected
     { "#00ff00", "#fdf6e3", "#657b83" }, // 2 = selected
 };
+#endif
+
+#ifdef GRUVBOX
+#define NUMCOLORS 17
+static const char colors[NUMCOLORS][ColLast][17] = {
+    /* border    fg         bg */
+    { "#282828", "#928374", "#282828"  },        /* [0]  01 - Client normal */
+    { "#ebdbb2", "#458588", "#282828"  },        /* [1]  02 - Client selected */
+    { "#83a598", "#fb4934", "#282828"  },        // [2]  03 - Client urgent
+    { "#83a598", "#83a598", "#282828"  },        // [3]  04 - Client occupied
+    { "#282828", "#fb4934", "#282828"  },        // [4]  05 - Red
+    { "#282828", "#fabd2f", "#282828"  },        // [5]  06 - Yellow
+    { "#282828", "#b8bb26", "#282828"  },        // [6]  07 - Green
+    { "#282828", "#928374", "#282828"  },        // [7]  08 - Dark grey
+    { "#282828", "#d5c4a1", "#282828"  },        // [8]  09 - Light grey
+    { "#928374", "#928374", "#282828"  },        // [9]  0A - Bar normal
+    { "#3c3836", "#a89985", "#282828"  },        // [10] 0B - Bar selected
+    { "#fb4934", "#fb4934", "#282828"  },        // [11] 0C - Bar urgent
+    { "#928374", "#458588", "#282828"  },        // [12] 0D - Bar occupied
+    { "#3c3836", "#3c3836", "#282828"  },        // [13] 0E - Tag normal
+    { "#83a598", "#83a598", "#282828"  },        // [14] 0F - Tag selected
+    { "#fb4934", "#fb4934", "#282828"  },        // [15] 10 - Tag urgent
+    { "#3c3836", "#928374", "#282828"  },        // [16] 11 - Tag occupied
+};
+#endif
 
 //static const char normbordercolor[] = "#fdf6e3";
 //static const char normbgcolor[]     = "#fdf6e3";
@@ -40,13 +66,16 @@ static const Bool topbar            = True;     /* False means bottom bar */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 //static const char *tags[] = { "\uE16A", "\uE16B", "\uE16C", "\uE16D", "\uE16E", "\uE16F", "\uE170", "\uE171", "\uE172" };
 
+/* xprop(1):
+ *  WM_CLASS(STRING) = instance, class
+ *  WM_NAME(STRING) = title
+ */
 static const Rule rules[] = {
     /* class            instance        title       tags mask       isfloating   iscentered     monitor */
     { "Gimp",           NULL,           NULL,       0,              True,        False,         -1 },
     { "Lxappearance",   NULL,           NULL,       0,              True,        True,          -1 },
     { "Lxrandr",        NULL,           NULL,       0,              True,        True,          -1 },
     { "Firefox",        NULL,           NULL,       1 << 1,         False,       False,         -1 },
-    { "Pidgin",         "Preferences",  NULL,       0,              True,        True,          -1 },
 };
 
 /* layout(s) */
@@ -57,15 +86,7 @@ static const Bool resizehints = False; /* True means respect size hints in tiled
 #include "bstack.c"
 #include "bstackhoriz.c"
 #include "gaplessgrid.c"
-//static const Layout layouts[] = {
-    //[> symbol     arrange function <]
-    //{ "É",      tile },    [> first entry is default <]
-    //{ "Ê",      NULL },    [> no layout function means floating behavior <]
-    //{ "[M]",      monocle },
-    //{ "Ì",      bstack  },
-    //{ "Ë",      bstackhoriz },
-    //{ "Í",      gaplessgrid },
-//};
+
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "||=",      tile },    /* first entry is default */
@@ -93,7 +114,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][Col
 static const char *termcmd[]  = { "st", NULL };
 //static const char *clear_notification[] = { "cln", NULL };
 
-static const int mouse_coords[] = { (1920/2), 0 }; // middle, top of screen
+static const int mouse_coords[] = { (2256/2), 0 }; // middle, top of screen
 
 static const char * kbd_backlight_down[] = { "kbd_backlight", "down", NULL };
 static const char * kbd_backlight_up[] = { "kbd_backlight", "up", NULL };
@@ -125,16 +146,18 @@ static Key keys[] = {
     //{ MODKEY,                       XK_u,      spawn,          {.v = mpc_prev } },
     //{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = mpc_seekf } },
     //{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = mpc_seekr } },
-    { MODKEY,                       XK_F1,     spawn,          {.v = SLEEP } },
-    { 0,                       XF86XK_KbdBrightnessDown,     spawn,          {.v = kbd_backlight_down } },
-    { 0,                       XF86XK_KbdBrightnessUp,     spawn,          {.v = kbd_backlight_up } },
-    { MODKEY,                       XK_F5,     spawn,          {.v = backlight_down } },
-    { MODKEY,                       XK_F6,     spawn,          {.v = backlight_up } },
-    { MODKEY,                       XK_F8,     spawn,          {.v = lxrandr } },
-    { MODKEY,                       XK_F9,     spawn,          {.v = touchpad_toggle } },
-    { MODKEY,                       XK_F10,    spawn,          {.v = sound_toggle } },
-    { MODKEY,                       XK_F11,    spawn,          {.v = sound_down } },
-    { MODKEY,                       XK_F12,    spawn,          {.v = sound_up } },
+    // { MODKEY,                       XK_F1,     spawn,          {.v = SLEEP } },
+    //{ 0,                       XF86XK_KbdBrightnessDown,     spawn,          {.v = kbd_backlight_down } },
+    //{ 0,                       XF86XK_KbdBrightnessUp,     spawn,          {.v = kbd_backlight_up } },
+    //{ MODKEY,                       XK_F5,     spawn,          {.v = backlight_down } },
+    //{ MODKEY,                       XK_F6,     spawn,          {.v = backlight_up } },
+    //{ MODKEY,                       XK_F8,     spawn,          {.v = lxrandr } },
+    //{ MODKEY,                       XK_F9,     spawn,          {.v = touchpad_toggle } },
+    //{ MODKEY,                       XK_F10,    spawn,          {.v = sound_toggle } },
+    //{ MODKEY,                       XK_F11,    spawn,          {.v = sound_down } },
+    //{ MODKEY,                       XK_F12,    spawn,          {.v = sound_up } },
+    { 0,                            XF86XK_MonBrightnessUp, spawn, {.v = backlight_up } },
+    { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = backlight_down } },
     { MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
