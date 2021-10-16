@@ -114,12 +114,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][Col
 static const char *termcmd[]  = { "st", NULL };
 //static const char *clear_notification[] = { "cln", NULL };
 
+static const char *drun[] = { "rofi", "-show", "drun", NULL };
+
 static const int mouse_coords[] = { (2256/2), 0 }; // middle, top of screen
 
 //static const char * kbd_backlight_down[] = { "kbd_backlight", "down", NULL };
 //static const char * kbd_backlight_up[] = { "kbd_backlight", "up", NULL };
-static const char * backlight_down[] = { "backlight", "down", NULL };
-static const char * backlight_up[] = { "backlight", "up", NULL };
+static const char * backlight_down[] = { "light", "-U", "5", NULL };
+static const char * backlight_up[] = { "light", "-A", "5", NULL };
 static const char * slock[] = { "slock", NULL };
 //static const char * slock_and_sleep[] = { "slocksleep", NULL };
 static const char * SLEEP[] = { "sudo", "pm-suspend", NULL };
@@ -127,7 +129,7 @@ static const char * sound_toggle[] = { "amixer", "set", "Master", "toggle", NULL
 static const char * sound_up[] = { "amixer", "set", "Master", "5%+", NULL };
 static const char * sound_down[] = { "amixer", "set", "Master", "5%-", NULL };
 static const char * lxrandr[] = { "lxrandr", NULL };
-static const char * browser[] = { "browser", NULL };
+static const char * browser[] = { "firefox", NULL };
 //static const char * cef_browser[] = { "cef", NULL };
 static const char * touchpad_toggle[] = { "touchpad_toggle", NULL };
 static const char * xmodmap[] = { "xmodmap", "/home/trevor/.Xmodmap", NULL };
@@ -140,6 +142,7 @@ static const char * vim_anywhere[] = { "/home/trevor/.vim-anywhere/bin/run", NUL
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+    { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = drun } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     //{ MODKEY,                       XK_i,      spawn,          {.v = mpc_toggle } },
     //{ MODKEY,                       XK_o,      spawn,          {.v = mpc_next } },
@@ -153,11 +156,11 @@ static Key keys[] = {
     //{ MODKEY,                       XK_F6,     spawn,          {.v = backlight_up } },
     //{ MODKEY,                       XK_F8,     spawn,          {.v = lxrandr } },
     //{ MODKEY,                       XK_F9,     spawn,          {.v = touchpad_toggle } },
-    { MODKEY,                       XK_F1,    spawn,          {.v = sound_toggle } },
-    { MODKEY,                       XK_F2,    spawn,          {.v = sound_down } },
-    { MODKEY,                       XK_F3,    spawn,          {.v = sound_up } },
-    //{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = backlight_up } },
-    //{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = backlight_down } },
+    { 0,                            XF86XK_AudioMute,    spawn,          {.v = sound_toggle } },
+    { 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = sound_down } },
+    { 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = sound_up } },
+    { 0,                            XF86XK_MonBrightnessUp, spawn, {.v = backlight_up } },
+    { 0,                            XF86XK_MonBrightnessDown, spawn, {.v = backlight_down } },
     { MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
