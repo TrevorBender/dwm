@@ -6,7 +6,7 @@ static const char font[] =
 //"-*-fixed-*-r-*-*-20-140-*-*-*-*-*-*"
 //"-*-terminal-bold-r-*-*-18-140-*-*-*-*-*-*"
 //"-*-inconsolata-medium-r-*-*-22-*-*-*-*-*-*-*"
-"Inconsolata:pixelsize=12:antialias=true;hinting=true"
+"Inconsolata:pixelsize=15:antialias=true;hinting=true"
 //"-*-droid sans mono-medium-r-normal-*-22-*-*-*-*-*-*-*";
 //","
 //"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*"
