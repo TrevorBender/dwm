@@ -1,3 +1,4 @@
+#include <X11/Xlib.h>
 #include <X11/XF86keysym.h>
 /* See LICENSE file for copyright and license details. */
 
@@ -6,10 +7,11 @@ static const char font[] =
 //"-*-fixed-*-r-*-*-20-140-*-*-*-*-*-*"
 //"-*-terminal-bold-r-*-*-18-140-*-*-*-*-*-*"
 //"-*-inconsolata-medium-r-*-*-22-*-*-*-*-*-*-*"
-"Inconsolata:pixelsize=15:antialias=true;hinting=true"
+// "Inconsolata:pixelsize=15:antialias=true;hinting=true"
 //"-*-droid sans mono-medium-r-normal-*-22-*-*-*-*-*-*-*";
 //","
 //"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*"
+"Hack:size=15:antialias=true:autohint=true"
 ;
 
 #ifdef SOLARIZED
@@ -61,7 +63,7 @@ static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
 
 /* tagging */
-//static const char *tags[] = { "☕", "☯", "☮", "✇", "☊"};
+// static const char *tags[] = { "☕", "☯", "☮", "✇", "☊", "6", "7", "8", "9"};
 //static const char *tags[] = { "Â", "À", "3", "4", "5", "6", "7", "8", "9" };
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 //static const char *tags[] = { "\uE16A", "\uE16B", "\uE16C", "\uE16D", "\uE16E", "\uE16F", "\uE170", "\uE171", "\uE172" };
@@ -111,7 +113,7 @@ static const Layout layouts[] = {
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
 //static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "kitty", NULL };
 //static const char *clear_notification[] = { "cln", NULL };
 
 static const char *drun[] = { "rofi", "-show", "drun", NULL };

@@ -33,6 +33,7 @@
 #include <X11/cursorfont.h>
 #include <X11/keysym.h>
 #include <X11/Xatom.h>
+#include <X11/XKBlib.h>
 #include <X11/Xlib.h>
 #include <X11/Xproto.h>
 #include <X11/Xutil.h>
@@ -1233,7 +1234,7 @@ keypress(XEvent *e) {
 
 	if (passthroughmode) {
 		ev = &e->xkey;
-		keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+		keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
 		for(i = 0; i < LENGTH(keys); i++)
 			if(keysym == keys[i].keysym
 					&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
@@ -1242,7 +1243,7 @@ keypress(XEvent *e) {
 					keys[i].func(&(keys[i].arg));
 	} else {
 		ev = &e->xkey;
-		keysym = XKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0);
+		keysym = XkbKeycodeToKeysym(dpy, (KeyCode)ev->keycode, 0, 0);
 		for(i = 0; i < LENGTH(keys); i++)
 			if(keysym == keys[i].keysym
 					&& CLEANMASK(keys[i].mod) == CLEANMASK(ev->state)
