@@ -1,0 +1,21 @@
+[
+ {
+  "directory": "/home/trevor/git/dwm",
+  "arguments": [
+   "cc",
+   "-c",
+   "-std=c99",
+   "-pedantic",
+   "-Wall",
+   "-Os",
+   "-I.",
+   "-I/usr/include",
+   "-I/usr/X11R6/include",
+   "-DVERSION=\"6.0\"",
+   "-DXINERAMA",
+   "-DGRUVBOX",
+   "dwm.c"
+  ],
+  "file": "dwm.c"
+ }
+]

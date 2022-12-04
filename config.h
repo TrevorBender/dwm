@@ -136,6 +136,7 @@ static const char * browser[] = { "firefox", NULL };
 static const char * touchpad_toggle[] = { "touchpad_toggle", NULL };
 static const char * xmodmap[] = { "xmodmap", "/home/trevor/.Xmodmap", NULL };
 static const char * vim_anywhere[] = { "/home/trevor/.vim-anywhere/bin/run", NULL };
+static const char * dragon[] = { "dragon-sel", NULL };
 
 #include "mousewarp.c"
 #include "movestack.c"
@@ -174,6 +175,7 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_h,      focusroot,      {0} },
     { MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
     { MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slock } },
+    { MODKEY|ShiftMask|ControlMask, XK_l,      spawn,          {.v = dragon } },
     { MODKEY,                       XK_equal,  setmfact,       {.f = 1.5} },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
