@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # set background color
 xsetroot -solid "#282828"
@@ -21,17 +21,16 @@ function start_services()
 
 function stop_services()
 {
-    kill -9 ${pids[@]}
+    kill -9 "${pids[@]}"
     pids=()
 }
 
 # start dwm
 mkdir -p ~/.cache/dwm
 while true ; do
-    MSG="DWM START $(date)"
-    echo "$MSG" >> ~/.cache/dwm/stderr
+    echo "DWM START $(date)" >> ~/.cache/dwm/stderr
     start_services
-    echo "pids ${pids[@]}" >> ~/.cache/dwm/stderr
+    echo "pids" "${pids[@]}" >> ~/.cache/dwm/stderr
     # if dwm exits with 0 the loop continues,
     # otherwise break and exit
     dwm 2>> ~/.cache/dwm/stderr || break
