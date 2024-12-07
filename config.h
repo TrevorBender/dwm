@@ -4,14 +4,8 @@
 
 /* appearance */
 static const char font[] =
-//"-*-fixed-*-r-*-*-20-140-*-*-*-*-*-*"
-//"-*-terminal-bold-r-*-*-18-140-*-*-*-*-*-*"
-//"-*-inconsolata-medium-r-*-*-22-*-*-*-*-*-*-*"
-// "Inconsolata:pixelsize=15:antialias=true;hinting=true"
-//"-*-droid sans mono-medium-r-normal-*-22-*-*-*-*-*-*-*";
-//","
-//"-*-stlarch-medium-r-*-*-12-*-*-*-*-*-*-*"
-"Hack:size=15:antialias=true:autohint=true"
+/* "Hack:size=15:antialias=true:autohint=true" */
+"FiraCode Nerd Font:pixelsize=15"
 ;
 
 #ifdef SOLARIZED
@@ -112,31 +106,22 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-//static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "kitty", NULL };
-//static const char *clear_notification[] = { "cln", NULL };
 
 static const char *drun[] = { "rofi", "-show", "drun", NULL };
 
 static const int mouse_coords[] = { (2256/2), 0 }; // middle, top of screen
 
-//static const char * kbd_backlight_down[] = { "kbd_backlight", "down", NULL };
-//static const char * kbd_backlight_up[] = { "kbd_backlight", "up", NULL };
 static const char * backlight_down[] = { "light", "-U", "5", NULL };
 static const char * backlight_up[] = { "light", "-A", "5", NULL };
 static const char * slock[] = { "slock", NULL };
-//static const char * slock_and_sleep[] = { "slocksleep", NULL };
 static const char * SLEEP[] = { "sudo", "pm-suspend", NULL };
 static const char * sound_toggle[] = { "amixer", "set", "Master", "toggle", NULL };
 static const char * sound_up[] = { "amixer", "set", "Master", "5%+", NULL };
 static const char * sound_down[] = { "amixer", "set", "Master", "5%-", NULL };
 static const char * lxrandr[] = { "lxrandr", NULL };
 static const char * browser[] = { "firefox", NULL };
-//static const char * cef_browser[] = { "cef", NULL };
-static const char * touchpad_toggle[] = { "touchpad_toggle", NULL };
-static const char * xmodmap[] = { "xmodmap", "/home/trevor/.Xmodmap", NULL };
-static const char * vim_anywhere[] = { "/home/trevor/.vim-anywhere/bin/run", NULL };
-static const char * dragon[] = { "dragon-sel", NULL };
+static const char * dragon[] = { "dragon --target", NULL };
 
 #include "mousewarp.c"
 #include "movestack.c"
@@ -147,18 +132,6 @@ static Key keys[] = {
     { MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
     { MODKEY|ShiftMask,             XK_p,      spawn,          {.v = drun } },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-    //{ MODKEY,                       XK_i,      spawn,          {.v = mpc_toggle } },
-    //{ MODKEY,                       XK_o,      spawn,          {.v = mpc_next } },
-    //{ MODKEY,                       XK_u,      spawn,          {.v = mpc_prev } },
-    //{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = mpc_seekf } },
-    //{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = mpc_seekr } },
-    // { MODKEY,                       XK_F1,     spawn,          {.v = SLEEP } },
-    //{ 0,                       XF86XK_KbdBrightnessDown,     spawn,          {.v = kbd_backlight_down } },
-    //{ 0,                       XF86XK_KbdBrightnessUp,     spawn,          {.v = kbd_backlight_up } },
-    //{ MODKEY,                       XK_F5,     spawn,          {.v = backlight_down } },
-    //{ MODKEY,                       XK_F6,     spawn,          {.v = backlight_up } },
-    //{ MODKEY,                       XK_F8,     spawn,          {.v = lxrandr } },
-    //{ MODKEY,                       XK_F9,     spawn,          {.v = touchpad_toggle } },
     { 0,                            XF86XK_AudioMute,    spawn,          {.v = sound_toggle } },
     { 0,                            XF86XK_AudioLowerVolume,    spawn,          {.v = sound_down } },
     { 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = sound_up } },
@@ -179,20 +152,15 @@ static Key keys[] = {
     { MODKEY,                       XK_equal,  setmfact,       {.f = 1.5} },
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    view,           {0} },
-    //{ MODKEY,                       XK_c,      spawn,          {.v = clear_notification } },
     { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
     { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
     { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
     { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monacle
-    //{ MODKEY|ShiftMask,             XK_b,      setlayout,      {.v = &layouts[3]} }, // bstack
     { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} }, // bstackhoriz
     { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, // gaplessgrid
     { MODKEY,                       XK_b,      spawn,          {.v = browser } },
-    //{ MODKEY,                       XK_c,      spawn,          {.v = cef_browser } },
     { MODKEY,                       XK_s,      spawn,          {.v = SLEEP } },
-    //{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = slock_and_sleep } },
     { MODKEY|ShiftMask,             XK_m,      warpmouse,      {.v = mouse_coords } },
-    { MODKEY,                       XK_x,      spawn,          { .v = xmodmap } },
     { MODKEY,                       XK_space,  setlayout,      {0} },
     { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
     { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -202,7 +170,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
     { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
     { MODKEY|ShiftMask|ControlMask, XK_p,      togglepassthrough, {0} },
-    { MODKEY,                       XK_v,      spawn,          { .v = vim_anywhere } },
+    /* TODO: create a custom nvim anywhere */
+    /* { MODKEY,                       XK_v,      spawn,          { .v = vim_anywhere } }, */
     TAGKEYS(                        XK_1,                      0)
     TAGKEYS(                        XK_2,                      1)
     TAGKEYS(                        XK_3,                      2)
