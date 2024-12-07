@@ -267,6 +267,7 @@ static Display *dpy;
 static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root, wmcheckwin;
+static int exitcode = EXIT_SUCCESS;
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -1259,6 +1260,7 @@ void
 quit(const Arg *arg)
 {
 	running = 0;
+    exitcode = arg->i;
 }
 
 Monitor *
@@ -2161,5 +2163,5 @@ main(int argc, char *argv[])
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
-	return EXIT_SUCCESS;
+	return exitcode;
 }
