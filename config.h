@@ -86,8 +86,6 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
-/* #include "bstack.c" */
-/* #include "bstackhoriz.c" */
 /* #include "gaplessgrid.c" */
 
 static const Layout layouts[] = {
@@ -133,7 +131,7 @@ static const char * browser[] = { "firefox", NULL };
 static const char * dragon[] = { "dragon --target", NULL };
 
 /* #include "mousewarp.c" */
-/* #include "movestack.c" */
+#include "movestack.c"
 /* #include "focusroot.c" */
 
 static Key keys[] = {
@@ -149,8 +147,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-    /* { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } }, */
-    /* { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } }, */
+    { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+    { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
     { MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
     { MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
     { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
