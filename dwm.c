@@ -2602,3 +2602,4 @@ bstackhoriz(Monitor *m) {
 		}
 	}
 }
+// vim: set noexpandtab:
