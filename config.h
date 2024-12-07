@@ -95,9 +95,9 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+    { "T  ",      bstack  },
+    { "=  ",      bstackhoriz },
 };
-    /* { "T  ",      bstack  }, */
-    /* { "=  ",      bstackhoriz }, */
     /* { "||=",      gaplessgrid }, */
 /* }; */
 
@@ -165,7 +165,7 @@ static Key keys[] = {
     { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} }, // tile
     { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
     { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monacle
-    /* { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} }, // bstackhoriz */
+    { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} }, // bstackhoriz
     /* { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, // gaplessgrid */
     { MODKEY,                       XK_b,      spawn,          {.v = browser } },
     { MODKEY,                       XK_s,      spawn,          {.v = SLEEP } },
