@@ -19,23 +19,35 @@ static const char dmenufont[]       = "FiraCode Nerd Font:size=9";
 /* Gruvbox color pallete */
 /* https://github.com/morhetz/gruvbox?tab=readme-ov-file */
 static const char col_bg0[] = "#282828";
+static const char col_bg1[] = "#3c3836";
+static const char col_bg2[] = "#504945";
+static const char col_bg0_h[] = "#1d2021";
 static const char col_fg[] = "#ebdbb2";
 static const char col_gray[] = "#928374";
 static const char col_blue[] = "#458588";
 static const char col_red[] = "#cc241d";
 static const char col_yellow[] = "#d79921";
 static const char col_green[] = "#98971a";
+static const char col_purp[] = "#b16286";
+static const char col_aqua[] = "#689d6a";
+static const char col_orange[] = "#d65d0e";
 
 static const char *colors[][3]      = {
-	/*               fg          bg       border     */
-	[SchemeNorm] = { col_gray,   col_bg0, col_bg0    },
-	[SchemeSel]  = { col_blue,   col_bg0, col_yellow },
-	[SchemeTag]  = { col_gray,   col_bg0, col_bg0    },
-	[SchemeTag1] = { col_blue,   col_bg0, col_bg0    }, /* term */
-	[SchemeTag2] = { col_red,    col_bg0, col_bg0    }, /* firefox */
-	[SchemeTag3] = { col_fg,     col_bg0, col_bg0    }, /* steam */
-	[SchemeTag4] = { col_green,  col_bg0, col_bg0    }, /* movie */
-	[SchemeTag5] = { col_yellow, col_bg0, col_bg0    }, /* volume */
+	/*                  fg          bg         border     */
+	[SchemeNorm]    = { col_gray,   col_bg0,   col_bg0    },
+	[SchemeSel]     = { col_blue,   col_bg0,   col_yellow },
+	[SchemeTag]     = { col_gray,   col_bg0,   col_bg0    },
+	[SchemeTag1]    = { col_blue,   col_bg0_h, col_bg0    }, /* term */
+	[SchemeTag2]    = { col_red,    col_bg0_h, col_bg0    }, /* firefox */
+	[SchemeTag3]    = { col_fg,     col_bg0_h, col_bg0    }, /* steam */
+	[SchemeTag4]    = { col_green,  col_bg0_h, col_bg0    }, /* movie */
+	[SchemeTag5]    = { col_yellow, col_bg0_h, col_bg0    }, /* volume */
+	[SchemeLayout]  = { col_orange, col_bg0,   col_bg0    },
+	[SchemeAudio]   = { col_yellow, col_bg0,   col_bg0    },
+	[SchemeBattery] = { col_blue,   col_bg0,   col_bg0    },
+	[SchemeMemory]  = { col_purp,   col_bg0,   col_bg0    },
+	[SchemeCPU]     = { col_aqua,   col_bg0,   col_bg0    },
+	[SchemeDate]    = { col_fg,     col_bg0,   col_bg0    },
 };
 
 /* tagging */
@@ -57,7 +69,9 @@ static const Rule rules[] = {
 	{ "Gimp",           NULL,           NULL,       0,              True,        -1 },
 	{ "Lxappearance",   NULL,           NULL,       0,              True,        -1 },
 	{ "Lxrandr",        NULL,           NULL,       0,              True,        -1 },
-	{ "Firefox",        NULL,           NULL,       1 << 1,         False,       -1 },
+	{ "firefox",        NULL,           NULL,       1 << 1,         False,       -1 },
+	{ "steam",          NULL,           NULL,       1 << 2,         False,       -1 },
+	{ "Pavucontrol",    NULL,           NULL,       1 << 4,         False,       -1 },
 };
 
 /* layout(s) */

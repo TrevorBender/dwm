@@ -81,6 +81,12 @@ enum {
 	SchemeTag3,
 	SchemeTag4,
 	SchemeTag5,
+	SchemeLayout,
+	SchemeAudio,
+	SchemeBattery,
+	SchemeMemory,
+	SchemeCPU,
+	SchemeDate,
 }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
@@ -193,6 +199,7 @@ static void detachstack(Client *c);
 static Monitor *dirtomon(int dir);
 static void drawbar(Monitor *m);
 static void drawbars(void);
+static int drawstatus(Monitor *m, int stw);
 static void enternotify(XEvent *e);
 static void expose(XEvent *e);
 static void focus(Client *c);
@@ -817,9 +824,7 @@ drawbar(Monitor *m)
 
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
-		drw_setscheme(drw, scheme[SchemeNorm]);
-		tw = TEXTW(stext) - lrpad / 2 + 2; /* 2px extra right padding */
-		drw_text(drw, m->ww - tw - stw, 0, tw, bh, lrpad / 2 - 2, stext, 0);
+		tw = drawstatus(m, stw);
 	}
 
 	resizebarwin(m);
@@ -840,7 +845,7 @@ drawbar(Monitor *m)
 		x += w;
 	}
 	w = TEXTW(m->ltsymbol);
-	drw_setscheme(drw, scheme[SchemeNorm]);
+	drw_setscheme(drw, scheme[SchemeLayout]);
 	x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
 	if ((w = m->ww - tw - stw - x) > bh) {
@@ -864,6 +869,82 @@ drawbars(void)
 
 	for (m = mons; m; m = m->next)
 		drawbar(m);
+}
+
+int
+drawstatus(Monitor *m, int stw)
+{
+	int tw = 0;
+	// copy into buffer
+	int l = strlen(stext) + 1;
+	char *text = malloc(sizeof(char) * l);
+	memcpy(text, stext, l);
+
+	// drw_setscheme(drw, scheme[SchemeNorm]);
+	// tw = TEXTW(stext) - lrpad / 2 + 2; /* 2px extra right padding */
+	// drw_text(drw, m->ww - tw - stw, 0, tw, bh, lrpad / 2 - 2, stext, 0);
+
+	// Calculate status text width
+	{
+		int i = -1;
+		char *orig = text;
+
+		while(text[++i]) {
+			if (text[i] == '`') {
+				text[i] = '\0';
+				tw += TEXTW(text) - lrpad / 2;
+				text[i] = '`';
+				text = text + i + 2;
+				i = -1;
+			}
+		}
+
+		tw += TEXTW(text) - lrpad / 2 + 2; /* 2px extra right padding */
+
+		text = orig;
+	}
+
+	// Draw text
+	{
+		int x = m->ww - tw - stw;
+		int w = 0;
+		int i = -1;
+		char *orig = text;
+
+		drw_setscheme(drw, scheme[SchemeNorm]);
+
+		while(text[++i]) {
+			if (text[i] == '`') {
+				text[i] = '\0';
+				w = TEXTW(text) - lrpad / 2;
+				drw_text(drw, x, 0, w, bh, lrpad / 2, text, 0);
+				x += w;
+
+				if (text[i+1] == 'v') {
+					drw_setscheme(drw, scheme[SchemeAudio]);
+				} else if (text[i+1] == 'b') {
+					drw_setscheme(drw, scheme[SchemeBattery]);
+				} else if (text[i+1] == 'm') {
+					drw_setscheme(drw, scheme[SchemeMemory]);
+				} else if (text[i+1] == 'c') {
+					drw_setscheme(drw, scheme[SchemeCPU]);
+				} else if (text[i+1] == 'd') {
+					drw_setscheme(drw, scheme[SchemeDate]);
+				}
+				text = text + i + 2;
+				i = -1;
+			}
+		}
+
+		w += TEXTW(text) - lrpad / 2 + 2; /* 2px extra right padding */
+		drw_text(drw, x, 0, w, bh, lrpad / 2 - 2, text, 0);
+		text = orig;
+	}
+
+	drw_setscheme(drw, scheme[SchemeNorm]);
+	free (text);
+
+	return tw;
 }
 
 void
