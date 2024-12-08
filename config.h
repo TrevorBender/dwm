@@ -19,18 +19,34 @@ static const char dmenufont[]       = "FiraCode Nerd Font:size=9";
 /* Gruvbox color pallete */
 /* https://github.com/morhetz/gruvbox?tab=readme-ov-file */
 static const char col_bg0[] = "#282828";
+static const char col_fg[] = "#ebdbb2";
 static const char col_gray[] = "#928374";
 static const char col_blue[] = "#458588";
+static const char col_red[] = "#cc241d";
 static const char col_yellow[] = "#d79921";
+static const char col_green[] = "#98971a";
 
 static const char *colors[][3]      = {
-	/*               fg        bg       border     */
-	[SchemeNorm] = { col_gray, col_bg0, col_bg0    },
-	[SchemeSel]  = { col_blue, col_bg0, col_yellow },
+	/*               fg          bg       border     */
+	[SchemeNorm] = { col_gray,   col_bg0, col_bg0    },
+	[SchemeSel]  = { col_blue,   col_bg0, col_yellow },
+	[SchemeTag]  = { col_gray,   col_bg0, col_bg0    },
+	[SchemeTag1] = { col_blue,   col_bg0, col_bg0    }, /* term */
+	[SchemeTag2] = { col_red,    col_bg0, col_bg0    }, /* firefox */
+	[SchemeTag3] = { col_fg,     col_bg0, col_bg0    }, /* steam */
+	[SchemeTag4] = { col_green,  col_bg0, col_bg0    }, /* movie */
+	[SchemeTag5] = { col_yellow, col_bg0, col_bg0    }, /* volume */
 };
 
 /* tagging */
 static const char *tags[] = { "", "", "", "󰿎", "󰕾"};
+static const unsigned int tag_schemes[] = {
+	SchemeTag1,
+	SchemeTag2,
+	SchemeTag3,
+	SchemeTag4,
+	SchemeTag5,
+};
 
 /* xprop(1):
  *  WM_CLASS(STRING) = instance, class
