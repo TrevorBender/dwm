@@ -36,12 +36,12 @@ static const char *colors[][3]      = {
 	/*                  fg          bg         border     */
 	[SchemeNorm]    = { col_gray,   col_bg0,   col_bg0    },
 	[SchemeSel]     = { col_blue,   col_bg0,   col_yellow },
-	[SchemeTag]     = { col_gray,   col_bg0,   col_bg0    },
-	[SchemeTag1]    = { col_blue,   col_bg0_h, col_bg0    }, /* term */
-	[SchemeTag2]    = { col_red,    col_bg0_h, col_bg0    }, /* firefox */
-	[SchemeTag3]    = { col_fg,     col_bg0_h, col_bg0    }, /* steam */
-	[SchemeTag4]    = { col_green,  col_bg0_h, col_bg0    }, /* movie */
-	[SchemeTag5]    = { col_yellow, col_bg0_h, col_bg0    }, /* volume */
+	[SchemeTag]     = { col_gray,   col_bg0_h, col_bg0    },
+	[SchemeTag1]    = { col_blue,   col_bg1,   col_bg0    }, /* term */
+	[SchemeTag2]    = { col_red,    col_bg1,   col_bg0    }, /* firefox */
+	[SchemeTag3]    = { col_fg,     col_bg1,   col_bg0    }, /* steam */
+	[SchemeTag4]    = { col_green,  col_bg1,   col_bg0    }, /* movie */
+	[SchemeTag5]    = { col_yellow, col_bg1,   col_bg0    }, /* volume */
 	[SchemeLayout]  = { col_orange, col_bg0,   col_bg0    },
 	[SchemeAudio]   = { col_yellow, col_bg0,   col_bg0    },
 	[SchemeBattery] = { col_blue,   col_bg0,   col_bg0    },
@@ -51,7 +51,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "󰿎", "󰕾"};
+static const char *tags[] = { "", "", "", "󰿎", "󰕾"};
 static const unsigned int tag_schemes[] = {
 	SchemeTag1,
 	SchemeTag2,
