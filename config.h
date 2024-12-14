@@ -128,7 +128,12 @@ static const char * sound_toggle[] = { "amixer", "set", "Master", "toggle", NULL
 static const char * sound_up[] = { "amixer", "set", "Master", "5%+", NULL };
 static const char * sound_down[] = { "amixer", "set", "Master", "5%-", NULL };
 static const char * browser[] = { "firefox", NULL };
-static const char * dragon[] = { "dragon --target", NULL };
+static const char * dragon[] = { "dragon", "--target", NULL };
+
+static const char * music_dock[] = { "eww", "open", "music", NULL };
+static const char * music_prev[] = { "playerctl", "previous", NULL };
+static const char * music_next[] = { "playerctl", "next", NULL };
+static const char * music_play_pause[] = { "playerctl", "play-pause", NULL };
 
 /* #include "mousewarp.c" */
 #include "movestack.c"
@@ -144,6 +149,11 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume,    spawn,          {.v = sound_up } },
 	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = backlight_up } },
 	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = backlight_down } },
+	{ 0,                            XF86XK_AudioPrev, spawn, {.v = music_prev } },
+	{ 0,                            XF86XK_AudioPlay, spawn, {.v = music_play_pause } },
+	{ 0,                            XF86XK_AudioNext, spawn, {.v = music_next } },
+	{ 0,                            XF86XK_AudioNext, spawn, {.v = music_next } },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = music_dock } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
