@@ -131,6 +131,7 @@ static const char * browser[] = { "firefox", NULL };
 static const char * dragon[] = { "dragon", "--target", NULL };
 
 static const char * music_dock[] = { "eww", "open", "music", NULL };
+static const char * eww_close[] = { "eww", "close-all", NULL };
 static const char * music_prev[] = { "playerctl", "previous", NULL };
 static const char * music_next[] = { "playerctl", "next", NULL };
 static const char * music_play_pause[] = { "playerctl", "play-pause", NULL };
@@ -152,8 +153,8 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioPrev, spawn, {.v = music_prev } },
 	{ 0,                            XF86XK_AudioPlay, spawn, {.v = music_play_pause } },
 	{ 0,                            XF86XK_AudioNext, spawn, {.v = music_next } },
-	{ 0,                            XF86XK_AudioNext, spawn, {.v = music_next } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = music_dock } },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = eww_close } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -194,10 +195,6 @@ static Key keys[] = {
 		TAGKEYS(                        XK_3,                      2)
 		TAGKEYS(                        XK_4,                      3)
 		TAGKEYS(                        XK_5,                      4)
-		TAGKEYS(                        XK_6,                      5)
-		TAGKEYS(                        XK_7,                      6)
-		TAGKEYS(                        XK_8,                      7)
-		TAGKEYS(                        XK_9,                      8)
 		{ MODKEY|ShiftMask,             XK_r,      quit,           {.i = 0} },
 		{ MODKEY|ShiftMask,             XK_q,      quit,           {.i = 1} },
 };
