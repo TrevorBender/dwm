@@ -129,6 +129,7 @@ static const char * sound_up[] = { "amixer", "set", "Master", "5%+", NULL };
 static const char * sound_down[] = { "amixer", "set", "Master", "5%-", NULL };
 static const char * browser[] = { "firefox", NULL };
 static const char * dragon[] = { "dragon", "--target", NULL };
+static const char * network[] = { "networkmanager_dmenu", "-i", NULL };
 
 static const char * music_dock[] = { "eww", "open", "music", NULL };
 static const char * eww_close[] = { "eww", "close-all", NULL };
@@ -153,6 +154,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioPrev, spawn, {.v = music_prev } },
 	{ 0,                            XF86XK_AudioPlay, spawn, {.v = music_play_pause } },
 	{ 0,                            XF86XK_AudioNext, spawn, {.v = music_next } },
+    { MODKEY|ControlMask,           XK_n,      spawn,          {.v = network } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = music_dock } },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = eww_close } },
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
