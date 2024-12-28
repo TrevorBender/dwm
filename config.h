@@ -122,7 +122,7 @@ static const char *drun[] = { "rofi", "-show", "drun", NULL };
 static const int mouse_coords[] = { (2256/2), 0 }; // middle, top of screen
 static const char * backlight_down[] = { "light", "-U", "5", NULL };
 static const char * backlight_up[] = { "light", "-A", "5", NULL };
-static const char * slock[] = { "slock", NULL };
+static const char * lock[] = { "i3lock", NULL };
 static const char * SLEEP[] = { "sudo", "pm-suspend", NULL };
 static const char * sound_toggle[] = { "amixer", "set", "Master", "toggle", NULL };
 static const char * sound_up[] = { "amixer", "set", "Master", "5%+", NULL };
@@ -167,7 +167,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	/* { MODKEY|ShiftMask,             XK_h,      focusroot,      {0} }, */
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = slock } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lock } },
 	{ MODKEY|ShiftMask|ControlMask, XK_l,      spawn,          {.v = dragon } },
 	{ MODKEY,                       XK_equal,  setmfact,       {.f = 1.5} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
