@@ -18,25 +18,41 @@ static const char dmenufont[]       = "FiraCode Nerd Font:size=9";
 
 /* Gruvbox color pallete */
 /* https://github.com/morhetz/gruvbox?tab=readme-ov-file */
-static const char col_bg0[] = "#282828";
-static const char col_bg1[] = "#3c3836";
-static const char col_bg2[] = "#504945";
-static const char col_bg0_h[] = "#1d2021";
-static const char col_fg[] = "#ebdbb2";
-static const char col_gray[] = "#928374";
-static const char col_blue[] = "#458588";
-static const char col_red[] = "#cc241d";
-static const char col_yellow[] = "#d79921";
-static const char col_green[] = "#98971a";
-static const char col_purp[] = "#b16286";
-static const char col_aqua[] = "#689d6a";
-static const char col_orange[] = "#d65d0e";
+/* static const char col_bg0[] = "#282828"; */
+/* static const char col_bg1[] = "#3c3836"; */
+/* static const char col_bg2[] = "#504945"; */
+/* static const char col_bg0_h[] = "#1d2021"; */
+/* static const char col_fg[] = "#ebdbb2"; */
+/* static const char col_gray[] = "#928374"; */
+/* static const char col_blue[] = "#458588"; */
+/* static const char col_red[] = "#cc241d"; */
+/* static const char col_yellow[] = "#d79921"; */
+/* static const char col_green[] = "#98971a"; */
+/* static const char col_purp[] = "#b16286"; */
+/* static const char col_aqua[] = "#689d6a"; */
+/* static const char col_orange[] = "#d65d0e"; */
+
+/* Kanagawa color pallete */
+/* https://github.com/rebelot/kanagawa.nvim/tree/master?tab=readme-ov-file#color-palette */
+static const char col_bg0[] = "#1f1f28";
+static const char col_bg1[] = "#2a2a37";
+static const char col_bg2[] = "#363646";
+static const char col_bg0_h[] = "#363646";
+static const char col_fg[] = "#dcd7ba";
+static const char col_gray[] = "#727169";
+static const char col_blue[] = "#7e9cd8";
+static const char col_red[] = "#e82424";
+static const char col_yellow[] = "#ff9e3b";
+static const char col_green[] = "#98bb6c";
+static const char col_purp[] = "#957fb8";
+static const char col_aqua[] = "#6a9589";
+static const char col_orange[] = "#ffa066";
 
 static const char *colors[][3]      = {
 	/*                  fg          bg         border     */
 	[SchemeNorm]    = { col_gray,   col_bg0,   col_bg0    },
 	[SchemeSel]     = { col_blue,   col_bg0,   col_yellow },
-	[SchemeTag]     = { col_gray,   col_bg0_h, col_bg0    },
+	[SchemeTag]     = { col_gray,   col_bg0,   col_bg0    },
 	[SchemeTag1]    = { col_blue,   col_bg1,   col_bg0    }, /* term */
 	[SchemeTag2]    = { col_red,    col_bg1,   col_bg0    }, /* firefox */
 	[SchemeTag3]    = { col_fg,     col_bg1,   col_bg0    }, /* steam */

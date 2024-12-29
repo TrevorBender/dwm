@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-export GTK_THEME=Adwaita:dark
-export QT_STYLE_OVERRIDE=Adwaita-Dark
-export GTK_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
+# export GTK_THEME=Adwaita:dark
+# export QT_STYLE_OVERRIDE=Adwaita-Dark
+# export GTK_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
 
 # set background color
-xsetroot -solid "#282828"
+# gruvbox
+# xsetroot -solid "#282828"
+xsetroot -solid "#1f1f28"
 
 pids=()
 
