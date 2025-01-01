@@ -16,8 +16,9 @@ function start_services()
 {
     slstatus &
     pids+=( $! )
-    nm-applet &
-    pids+=( $! )
+    # replaced with networkmanager_dmenu
+    # nm-applet &
+    # pids+=( $! )
     blueman-applet &
     pids+=( $! )
     pasystray &
