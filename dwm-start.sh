@@ -7,7 +7,8 @@
 # set background color
 # gruvbox
 # xsetroot -solid "#282828"
-xsetroot -solid "#1f1f28"
+# kanagawa solid color
+# xsetroot -solid "#1f1f28"
 
 pids=()
 
@@ -22,6 +23,8 @@ function start_services()
     pasystray &
     pids+=( $! )
     dunst &
+    pids+=( $! )
+    picom --backend=glx &
     pids+=( $! )
 }
 
