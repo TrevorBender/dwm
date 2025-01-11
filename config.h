@@ -97,8 +97,6 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
-/* #include "gaplessgrid.c" */
-
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "",      tile },    /* first entry is default */
@@ -107,8 +105,6 @@ static const Layout layouts[] = {
 	{ "T",      bstack  },
 	{ "",      bstackhoriz },
 };
-/* { "||=",      gaplessgrid }, */
-/* }; */
 
 static const char *monocle_symbols[] = {
 	"󱅊",
@@ -136,7 +132,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg0, "-nf", col_gray, "-sb", col_bg0, "-sf", col_blue, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 static const char *drun[] = { "rofi", "-show", "drun", NULL };
-static const int mouse_coords[] = { (2256/2), 0 }; // middle, top of screen
+static const char * close_not[] = {"dunstctl", "close-all", NULL };
 static const char * backlight_down[] = { "light", "-U", "5", NULL };
 static const char * backlight_up[] = { "light", "-A", "5", NULL };
 static const char * lock[] = { "i3lock", NULL };
@@ -156,9 +152,7 @@ static const char * music_play_pause[] = { "playerctl", "play-pause", NULL };
 
 static const char * toggle_trans[] = { "picom-trans", "-t", "-c", NULL };
 
-/* #include "mousewarp.c" */
 #include "movestack.c"
-/* #include "focusroot.c" */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -177,6 +171,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = music_dock } },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = eww_close } },
 	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = toggle_trans } },
+	{ MODKEY,                       XK_grave,  spawn,          {.v = close_not } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
@@ -184,7 +179,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	/* { MODKEY|ShiftMask,             XK_h,      focusroot,      {0} }, */
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lock } },
 	{ MODKEY|ShiftMask|ControlMask, XK_l,      spawn,          {.v = dragon } },
@@ -196,10 +190,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} }, // floating
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} }, // monacle
 	{ MODKEY,                       XK_n,      setlayout,      {.v = &layouts[4]} }, // bstackhoriz
-	/* { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[5]} }, // gaplessgrid */
 	{ MODKEY,                       XK_b,      spawn,          {.v = browser } },
 	{ MODKEY,                       XK_s,      spawn,          {.v = SLEEP } },
-	/* { MODKEY|ShiftMask,             XK_m,      warpmouse,      {.v = mouse_coords } }, */
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
@@ -212,9 +204,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = GAP_RESET } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
-	/* { MODKEY|ShiftMask|ControlMask, XK_p,      togglepassthrough, {0} }, */
-	/* TODO: create a custom nvim anywhere */
-	/* { MODKEY,                       XK_v,      spawn,          { .v = vim_anywhere } }, */
 	TAGKEYS(                        XK_1,                      0)
 		TAGKEYS(                        XK_2,                      1)
 		TAGKEYS(                        XK_3,                      2)
