@@ -154,6 +154,8 @@ static const char * music_prev[] = { "playerctl", "previous", NULL };
 static const char * music_next[] = { "playerctl", "next", NULL };
 static const char * music_play_pause[] = { "playerctl", "play-pause", NULL };
 
+static const char * toggle_trans[] = { "picom-trans", "-t", "-c", NULL };
+
 /* #include "mousewarp.c" */
 #include "movestack.c"
 /* #include "focusroot.c" */
@@ -171,10 +173,10 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioPrev, spawn, {.v = music_prev } },
 	{ 0,                            XF86XK_AudioPlay, spawn, {.v = music_play_pause } },
 	{ 0,                            XF86XK_AudioNext, spawn, {.v = music_next } },
-    { MODKEY|ControlMask,           XK_n,      spawn,          {.v = network } },
+	{ MODKEY|ControlMask,           XK_n,      spawn,          {.v = network } },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = music_dock } },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = eww_close } },
-	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
+	{ MODKEY|ShiftMask,             XK_t,      spawn,          {.v = toggle_trans } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
