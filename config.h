@@ -17,22 +17,25 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Fira Code:size=9", "FiraCode Nerd Font:size=12:weight=bold" };
 static const char dmenufont[]       = "FiraCode Nerd Font:size=9";
 
+#ifdef COLOR_GRUVBOX
 /* Gruvbox color pallete */
 /* https://github.com/morhetz/gruvbox?tab=readme-ov-file */
-/* static const char col_bg0[] = "#282828"; */
-/* static const char col_bg1[] = "#3c3836"; */
-/* static const char col_bg2[] = "#504945"; */
-/* static const char col_bg0_h[] = "#1d2021"; */
-/* static const char col_fg[] = "#ebdbb2"; */
-/* static const char col_gray[] = "#928374"; */
-/* static const char col_blue[] = "#458588"; */
-/* static const char col_red[] = "#cc241d"; */
-/* static const char col_yellow[] = "#d79921"; */
-/* static const char col_green[] = "#98971a"; */
-/* static const char col_purp[] = "#b16286"; */
-/* static const char col_aqua[] = "#689d6a"; */
-/* static const char col_orange[] = "#d65d0e"; */
+static const char col_bg0[] = "#282828";
+static const char col_bg1[] = "#3c3836";
+static const char col_bg2[] = "#504945";
+static const char col_bg0_h[] = "#1d2021";
+static const char col_fg[] = "#ebdbb2";
+static const char col_gray[] = "#928374";
+static const char col_blue[] = "#458588";
+static const char col_red[] = "#cc241d";
+static const char col_yellow[] = "#d79921";
+static const char col_green[] = "#98971a";
+static const char col_purp[] = "#b16286";
+static const char col_aqua[] = "#689d6a";
+static const char col_orange[] = "#d65d0e";
+#endif
 
+#ifdef COLOR_KANAGAWA
 /* Kanagawa color pallete */
 /* https://github.com/rebelot/kanagawa.nvim/tree/master?tab=readme-ov-file#color-palette */
 static const char col_bg0[] = "#1f1f28";
@@ -48,6 +51,8 @@ static const char col_green[] = "#98bb6c";
 static const char col_purp[] = "#957fb8";
 static const char col_aqua[] = "#6a9589";
 static const char col_orange[] = "#ffa066";
+#endif
+
 
 static const char *colors[][3]      = {
 	/*                  fg          bg         border     */
