@@ -23,7 +23,6 @@ static const char dmenufont[]       = "FiraCode Nerd Font:size=9";
 static const char col_bg0[] = "#282828";
 static const char col_bg1[] = "#3c3836";
 static const char col_bg2[] = "#504945";
-static const char col_bg0_h[] = "#1d2021";
 static const char col_fg[] = "#ebdbb2";
 static const char col_gray[] = "#928374";
 static const char col_blue[] = "#458588";
@@ -41,7 +40,6 @@ static const char col_orange[] = "#d65d0e";
 static const char col_bg0[] = "#1f1f28";
 static const char col_bg1[] = "#2a2a37";
 static const char col_bg2[] = "#363646";
-static const char col_bg0_h[] = "#363646";
 static const char col_fg[] = "#dcd7ba";
 static const char col_gray[] = "#727169";
 static const char col_blue[] = "#7e9cd8";
@@ -53,6 +51,40 @@ static const char col_aqua[] = "#6a9589";
 static const char col_orange[] = "#ffa066";
 #endif
 
+#ifdef COLOR_KANAGAWA_LOTUS
+/* Kanagawa color pallete */
+/* https://github.com/rebelot/kanagawa.nvim/tree/master?tab=readme-ov-file#color-palette */
+static const char col_bg0[] = "#f2ecbc";
+static const char col_bg1[] = "#2a2a37";
+static const char col_bg2[] = "#363646";
+static const char col_bg0_h[] = "#363646";
+static const char col_fg[] = "#545464";
+static const char col_gray[] = "#727169";
+static const char col_blue[] = "#7e9cd8";
+static const char col_red[] = "#e82424";
+static const char col_yellow[] = "#ff9e3b";
+static const char col_green[] = "#98bb6c";
+static const char col_purp[] = "#957fb8";
+static const char col_aqua[] = "#6a9589";
+static const char col_orange[] = "#ffa066";
+#endif
+
+#ifdef COLOR_SOLARIZED_LIGHT
+/* Solarized color pallete */
+/* https://ethanschoonover.com/solarized/ */
+static const char col_bg0[] = "#fdf6e3"; // base3
+static const char col_bg1[] = "#eee8d5"; // base2
+static const char col_bg2[] = "#93a1a1"; // base1
+static const char col_fg[] = "#657b83"; // base00
+static const char col_gray[] = "#93a1a1"; // base1
+static const char col_blue[] = "#268bd2";
+static const char col_red[] = "#dc322f";
+static const char col_yellow[] = "#b58900";
+static const char col_green[] = "#859900";
+static const char col_purp[] = "#6c71c4";
+static const char col_aqua[] = "#2aa198";
+static const char col_orange[] = "#cb4b16";
+#endif
 
 static const char *colors[][3]      = {
 	/*                  fg          bg         border     */
