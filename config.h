@@ -167,7 +167,7 @@ static const char *monocle_symbols[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_bg0, "-nf", col_gray, "-sb", col_bg0, "-sf", col_blue, NULL };
-static const char *termcmd[]  = { "kitty", NULL };
+static const char *termcmd[]  = { "ghostty", NULL };
 static const char *drun[] = { "rofi", "-show", "drun", NULL };
 static const char * close_not[] = {"dunstctl", "close-all", NULL };
 static const char * backlight_down[] = { "light", "-U", "5", NULL };
