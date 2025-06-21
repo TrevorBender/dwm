@@ -1,24 +1,13 @@
 #!/usr/bin/env bash
 
-# export GTK_THEME=Adwaita:dark
-# export QT_STYLE_OVERRIDE=Adwaita-Dark
-# export GTK_RC_FILES=/usr/share/themes/Adwaita-dark/gtk-2.0/gtkrc
-
-# set background color
-# gruvbox
-# xsetroot -solid "#282828"
-# kanagawa solid color
-# xsetroot -solid "#1f1f28"
-
 pids=()
 
 function start_services()
 {
     slstatus &
     pids+=( $! )
-    # replaced with networkmanager_dmenu
-    # nm-applet &
-    # pids+=( $! )
+    nm-applet &
+    pids+=( $! )
     blueman-applet &
     pids+=( $! )
     pasystray &
