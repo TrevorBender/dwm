@@ -1,31 +1,22 @@
 {
   description = "A Nix-flake-based C/C++ development environment";
 
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/release-24.11";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
 
-  outputs = {
-    self,
-    nixpkgs,
-  }: let
-    supportedSystems = ["x86_64-linux"];
-    forEachSupportedSystem = f:
-      nixpkgs.lib.genAttrs supportedSystems (system:
-        f {
-          pkgs = import nixpkgs {inherit system;};
-        });
+  outputs = {nixpkgs, ...}: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
   in {
-    devShells = forEachSupportedSystem ({pkgs}: {
-      default =
-        pkgs.mkShell
-        {
-          packages = with pkgs; [
-            xorg.libX11
-            xorg.libXft
-            xorg.libXinerama
-            clang-tools
-            gdb
-          ];
-        };
-    });
+    devShells.${system}.default =
+      pkgs.mkShell
+      {
+        packages = with pkgs; [
+          xorg.libX11
+          xorg.libXft
+          xorg.libXinerama
+          clang-tools
+          gdb
+        ];
+      };
   };
 }

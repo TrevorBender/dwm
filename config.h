@@ -24,6 +24,21 @@ static const char *fonts[] = {"Fira Code:size=9",
                               "FiraCode Nerd Font:size=12:weight=bold"};
 static const char dmenufont[] = "FiraCode Nerd Font:size=9";
 
+#ifdef COLOR_ALABASTER
+static const char col_bg0[] = "#f7f7f7";
+static const char col_bg1[] = "#f7f7f7";
+static const char col_bg2[] = "#f7f7f7";
+static const char col_fg[] = "#161616";
+static const char col_gray[] = "#818181";
+static const char col_blue[] = "#4369C3";
+static const char col_red[] = "#AF4742";
+static const char col_yellow[] = "#CD9816";
+static const char col_green[] = "#539439";
+static const char col_purp[] = "#844EA3";
+static const char col_aqua[] = "#168CB6";
+static const char col_orange[] = "#FCBF6A";
+#endif
+
 #ifdef COLOR_GRUVBOX
 /* Gruvbox color pallete */
 /* https://github.com/morhetz/gruvbox?tab=readme-ov-file */
